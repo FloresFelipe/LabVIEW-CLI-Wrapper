@@ -17,7 +17,7 @@ Lately, I've been working with the [InisghtCM Console](https://www.ni.com/en-us/
 
 Well, I start by building an Event-Driven State Machine that would basically respond to a button click event by building a command string, running it by calling the System Exec.vi, and then processing the Standard Output to show it on different types of indicators (List Box, String Indicator, Menu Ring, etc)
 
-I worked fine, but I began to think that this code could be easily reused to bring other applications that operate via CLI to LabVIEW. But how to do it in a scalabe manner? I mean, do I need to copy the entire project, delete the cases for the InsightCM command, edit both the TypeDefs in the project (Data Cluster and Enum) to then be able to implement my commands and UI? That sounds like a lot of work! =//
+I worked fine, but I began to think that this code could be easily reused to bring other applications that operate via CLI to LabVIEW. But how to do it in a scalabe manner? I mean, do I need to copy the entire project, delete the cases for the InsightCM command, edit both the TypeDefs in the project (Data Cluster and Enum) to then be able to implement my commands and UI? That sounds like a lot of work! :weary:
 
 When I think in reusability and scalability, LabVIEW OOP always comes up to my mind, so I decided to give it a shot.
 
@@ -45,7 +45,7 @@ As those design patters are quite simple to understand and implement I started o
 
 ![Console Wrapper Class](/Documentation/class%20diagrams/Console%20Wrapper.png "Console Wrapper Class")
 
-where __Initialize__ is my factory method, __Execute__ is my template method and __Build Command__, __Run Command__, __Process Standard Output__ - if you remember well a few lines above - are the methods I wanted to reuse.
+where __Initialize__ is my factory method, __Execute__ is my template method and __Build Command__, __Run Command__, __Process Standard Output__ (if you remember well a few lines above) are the methods I wanted to reuse.
 
 The attributes of the class I took from the Data Cluster TypeDef from my State Machine.
 
@@ -71,7 +71,7 @@ As simple as it can be, I created a unit test to validate my template pattern, u
 
 What it does is similar to the following code, but with more functionality such as test statistics and again, __no need of creating test VIs__
 
-![Base Class Test Code](/Documentation/images/InitialTest.png)
+![Base Class Test Code](/Documentation/images/initialTest.png)
 
 Here is how the unit test runs.
 
@@ -90,7 +90,7 @@ I created that class in LabVIEW and overrode both __Initialize.vi__ and __Proces
 
 The __Initialize.vi__ Enters the __Application Name__ and __Working Directory__ attributes.
 
-![Initialize Override](/Documentation/images/Initialize01.png "Initialize Override")
+![Initialize Override](/Documentation/images/initialize01.png "Initialize Override")
 
 The __Process Standard Output.vi__ override will parse the command response string and get the list of definitions.
 
