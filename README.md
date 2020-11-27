@@ -8,7 +8,7 @@ You should probably be familiar with the __System Exec VI__ which is used to [ru
 
 ![System Exec.vi view from LabVIEW Context Help](/Documentation/images/sysexec.gif "System Exec VI")
 
-This single VI gives you the power to easily run any command you would run in the windows command prompt, for example, directly from the LabVIEW block diagram. Some common tasks you can perform with it are:
+This single VI gives you the power to easily run any command you would run in the windows command prompt directly from the LabVIEW block diagram. Some common tasks you can perform with it are:
 
 * Run External Executables.
 * Execute OS commands such as creating directories, listing files, retrieving IP configuration, schedule the computer to shutdown, etc.
@@ -32,7 +32,7 @@ When I think in reusability and scalability, LabVIEW OOP always comes up to my m
 
 ### Where it all began
 
-For sometime I was afraid of giving away of my handy state machine design pattern, as it is quite easy to implement and solves most part of my development challenges. Moreover, talking about LabVIEW OOP sounded like too much for my needs. In the last months, I've been giving away of those thoughts and developing everything I can in LabVIEW OOP.
+For some time I was afraid of giving away of my handy state machine design pattern, as it is quite easy to implement and solves most part of my development challenges. Moreover, talking about LabVIEW OOP sounded like too much for my needs. In the last months, I've been giving away of those thoughts and developing everything I can in LabVIEW OOP.
 
 In my state machine, I noticed there were three fixed states that will always be there and they will always be executed in the same order:
 
@@ -40,9 +40,9 @@ In my state machine, I noticed there were three fixed states that will always be
 2. __Run Command__ - Never changes. It calls the __System Exec.vi__, passing the command built and the path from where we must run it.
 3. __Process Standard output__ - May change depending on the application output, but will always be called after the Run Command State to process the string return coming out of the System Exec VI.
 
-That order of steps, where some of them will be always the same and some of them may change depending on the implementation reminds me of the __Template Method__ design pattern. This is one of those [Object Oriented design patterns by the Gang of Four (GoF)](https://en.wikipedia.org/wiki/Design_Patterns). This design pattern basically states that a class should implement a method that invoke other methods in the class in a specific, standardized way, that is, this _template method_ will tell the users of the class how must the steps run.
+That order of steps, where some of them will be always the same and some of them may change depending on the implementation, reminds me of the __Template Method__ design pattern. This is one of those [Object Oriented design patterns by the Gang of Four (GoF)](https://en.wikipedia.org/wiki/Design_Patterns). This design pattern basically states that a class should implement a method that invoke other methods in the class in a specific, standardized way, that is, this _template method_ will tell the users of the class how must the steps run.
 
-Another challenge is that some initial parameters such as the __Application Name__ and the __Working Directory__, as well as checking if the app is installed, its bitness, and any initial validation may vary depending on the application, as well as could be too much for a user that wanted an easier alternative to the CLI. Thinking on that, I decided to implement another object oriented design pattern called __Factory Method__. That design pattern determines that you should create method in a class that will return a parametrized, "ready-to-use" object, hiding all the complexity and making sure all initialization routines were done correctly.
+Another challenge is that some initial parameters such as the __Application Name__ and the __Working Directory__, as well as checking if the app is installed, its bitness, and any initial validation may vary depending on the application, as well as could be too much for a user that wanted an easier alternative to the CLI. Reflecting upon that, I decided to implement another object oriented design pattern called __Factory Method__. That design pattern determines that you should create a method in a class that will return a parametrized, "ready-to-use" object, hiding all the complexity and making sure all initialization routines are done correctly.
 
 I highly recommend you to review the [Template Method Pattern](https://refactoring.guru/design-patterns/template-method) and [Factory Method Patter](https://refactoring.guru/design-patterns/factory-method) articles at __refactoring.guru__. The text is easy to understand and there is a lot of good illustrations over there.
 
@@ -105,7 +105,7 @@ The __Process Standard Output.vi__ override will parse the command response stri
 
 ![Process Standard Output Override](/Documentation/images/ProcessStandardOutputOverride.png "Proces Standard Output Override")
 
-__Note:__ The __Initialize__ method is a public method because it must be called in any code that will use that your wrapper class. On the other hand. the __Process Standard Output__ method is protected since we want it to be called only from the template method at the Base class while allowing it to be overridden by descendant classes.
+__Note:__ The __Initialize__ method is a public method because it must be called in any code that will use your wrapper class. On the other hand, the __Process Standard Output__ method is protected since we want it to be called only from the template method at the Base class while allowing it to be overridden by descendant classes.
 
 ### Implementing Application Commands
 
