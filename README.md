@@ -16,6 +16,12 @@ This single VI gives you the power to easily run any command you would run in th
 
 Lately, I've been working with the [InisghtCM Console](https://www.ni.com/en-us/support/documentation/supplemental/17/using-the-insightcm-console-application.html) application, which is a command line application for managing the [InsightCM server](https://www.ni.com/en-us/shop/data-acquisition-and-control/application-software-for-data-acquisition-and-control-category/what-is-insightcm.html). Using it is not rocket science at all, but I wanted to incorporate a GUI to it in order to have a more friendly user interface and will keep me from repeating the same instructions several times in the command line. :v::smiley:
 
+---
+
+The project I'm talking about is the [InsightCM Console in LabVIEW](https://github.com/FloresFelipe/InsightCM-Console-in-LabVIEW).
+
+---
+
 Well, I started by building an Event-Driven State Machine that basically responds to a button click event by building a command string, running it by calling the System Exec.vi, and then processing the standard output to show it on different types of indicators (List Box, String Indicator, Menu Ring, etc)
 
 It worked fine, but I began to think that this code could be easily reused to bring other applications that operate via CLI to LabVIEW. But how to do it in a scalable manner? I mean, do I need to copy the entire project, delete the cases for the InsightCM command, edit both the TypeDefs in the project (Data Cluster and Enum) to then be able to implement my commands and UI? That sounds like a lot of work! :weary:
@@ -124,7 +130,6 @@ LabVIEW implementation:
 ![ListDefinitions](/Documentation/images/ListDefinitions.png "ListDefinitions.vi")
 
 Unit Tests were also created for each of the "command" methods in the class. The final version of the class looks like this.
-
 
 ![Class in the Project](/Documentation/images/ICMConsoleWrapperClassInProject.png "InsightCM Console Wrapper Implementation")
 
